@@ -1,6 +1,7 @@
 package com.doc.auth.controllers;
 
 import com.doc.auth.dtos.UserInfoDTO;
+import com.doc.auth.dtos.UserLoginDTO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
@@ -30,6 +31,17 @@ public class UserController {
         System.out.println("Get info for user: " + userId);
 
         //TODO: add service to handle logic
+
+        return null;
+    }
+
+    @PostMapping("/login")
+    public UserLoginDTO loginUser(@RequestBody UserLoginDTO userLoginDTO) {
+
+        checkNotNull(userLoginDTO);
+
+        System.out.println(userLoginDTO.getUsername());
+        System.out.println(userLoginDTO.getPassword());
 
         return null;
     }
