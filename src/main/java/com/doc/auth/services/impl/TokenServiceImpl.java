@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 public class TokenServiceImpl implements TokenService {
 
     @Override
-    public void validate(String jwtToken) {
+    public void validateToken(String jwtToken) {
 
     }
 }

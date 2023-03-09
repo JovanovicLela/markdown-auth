@@ -13,7 +13,7 @@ public class RoleServiceImpl implements RoleService {
     }
 
     @Override
-    public RoleInfoDTO getRole(RoleInfoDTO roleInfoDTO) {
+    public RoleInfoDTO getRole(String roleId) {
         return null;
     }
 }

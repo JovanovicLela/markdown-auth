@@ -1,29 +1,29 @@
 package com.doc.auth.controllers;
 
 import com.doc.auth.dtos.RoleInfoDTO;
+import com.doc.auth.services.RoleService;
+import com.google.common.base.Preconditions;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import static com.google.common.base.Preconditions.checkNotNull;
 
 @RestController
 @RequestMapping("/role")
 public class RoleController {
 
+    @Autowired
+    RoleService roleService;
+
     @PostMapping("/create")
     public RoleInfoDTO createRole(@RequestBody RoleInfoDTO roleInfoDTO) {
 
-        System.out.println(roleInfoDTO.getRole());
-
-        // TODO: create service to handle creation logic
-
-        return null;
+        checkNotNull(roleInfoDTO);
+        return roleService.createRole(roleInfoDTO);
     }
 
     @GetMapping("/info/{roleId}")
     public RoleInfoDTO getRoleInfo(@PathVariable String roleId) {
-
-        System.out.println("Get info for role: " + roleId);
-
-        // TODO: create service to handle creation logic
-
-        return null;
+        return roleService.getRole(roleId);
     }
 }

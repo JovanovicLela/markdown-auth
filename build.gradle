@@ -27,6 +27,8 @@ dependencies {
 	implementation("com.google.guava:guava:24.0-jre")
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'org.springframework.security:spring-security-test'
+	implementation group: 'org.modelmapper', name: 'modelmapper', version: '2.1.1'
+
 }
 
 tasks.named('test') {
