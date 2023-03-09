@@ -2,6 +2,7 @@ package com.doc.auth.services.impl;
 
 import com.doc.auth.dtos.UserInfoDTO;
 import com.doc.auth.dtos.UserLoginDTO;
+import com.doc.auth.models.MarkdownUserModel;
 import com.doc.auth.services.UserService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,8 +15,12 @@ public class UserServiceImpl implements UserService {
     ModelMapper modelMapper;
 
     @Override
-    public UserInfoDTO createUser(UserInfoDTO userInfoDTO) {
-        return null;
+    public void createUser(UserInfoDTO userInfoDTO) {
+
+        MarkdownUserModel markdownUserModel = modelMapper.map(userInfoDTO, MarkdownUserModel.class);
+        // TODO: saving in repository
+
+        modelMapper.map(markdownUserModel, userInfoDTO);
     }
 
     @Override

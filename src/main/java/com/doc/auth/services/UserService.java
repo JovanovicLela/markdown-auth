@@ -5,7 +5,7 @@ import com.doc.auth.dtos.UserLoginDTO;
 
 public interface UserService {
 
-    UserInfoDTO createUser(UserInfoDTO userInfoDTO);
+    void createUser(UserInfoDTO userInfoDTO);
     UserInfoDTO getUser(String userId);
     UserInfoDTO loginUser(UserLoginDTO userLoginDTO);
 
