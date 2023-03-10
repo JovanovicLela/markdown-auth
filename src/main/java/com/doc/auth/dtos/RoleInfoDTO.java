@@ -8,6 +8,7 @@ import java.util.Date;
 public class RoleInfoDTO {
 
     private String role;
+    private String id;
     private Date dateCreated;
     private Date dateUpdated;
 }

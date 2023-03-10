@@ -22,7 +22,6 @@ public class UserController {
 
         checkNotNull(userInfoDTO);
         userService.createUser(userInfoDTO);
-
         return userInfoDTO;
     }
 

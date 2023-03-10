@@ -19,7 +19,8 @@ public class RoleController {
     public RoleInfoDTO createRole(@RequestBody RoleInfoDTO roleInfoDTO) {
 
         checkNotNull(roleInfoDTO);
-        return roleService.createRole(roleInfoDTO);
+        roleService.createRole(roleInfoDTO);
+        return roleInfoDTO;
     }
 
     @GetMapping("/info/{roleId}")
