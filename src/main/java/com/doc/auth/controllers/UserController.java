@@ -5,6 +5,7 @@ import com.doc.auth.dtos.UserLoginDTO;
 import com.doc.auth.services.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import static com.google.common.base.Preconditions.checkNotNull;
@@ -17,7 +18,7 @@ public class UserController {
     @Autowired
     UserService userService;
 
-    @PostMapping("/create")
+    @PostMapping("/cr    @PreAuthorize(\"hasAnyRole('ANONYMOUS', 'ADMIN')\")\neate")
     public UserInfoDTO createUser(@RequestBody UserInfoDTO userInfoDTO) {
 
         checkNotNull(userInfoDTO);
@@ -26,11 +27,13 @@ public class UserController {
     }
 
     @GetMapping("/info/{userId}")
+    @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
     public UserInfoDTO getUserInfo(@PathVariable String userId) {
         return userService.getUser(userId);
     }
 
     @PostMapping("/login")
+    @PreAuthorize("hasAnyRole('ANONYMOUS')")
     public UserInfoDTO loginUser(@RequestBody UserLoginDTO userLoginDTO) {
 
         checkNotNull(userLoginDTO);
