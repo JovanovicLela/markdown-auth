@@ -1,7 +1,7 @@
 package com.doc.auth.config.security;
 
 import com.google.common.net.HttpHeaders;
-import org.bson.json.JsonObject;
+import org.json.JSONObject;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+import static javax.servlet.http.HttpServletResponse.SC_FORBIDDEN;
 import static org.springframework.util.ObjectUtils.isEmpty;
 
 public class AuthFilter extends AbstractAuthenticationProcessingFilter {
@@ -55,10 +56,16 @@ public class AuthFilter extends AbstractAuthenticationProcessingFilter {
 
     @Override
     protected void unsuccessfulAuthentication(HttpServletRequest request, HttpServletResponse response, AuthenticationException failed) throws IOException, ServletException {
-        response.setStatus(HttpServletResponse.SC_FORBIDDEN);
-        JsonObject jsonObject = new JsonObject("error");
 
-        response.getWriter().print(jsonObject);
+        response.setStatus(SC_FORBIDDEN);
+
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("error", failed.getCause());
+        jsonObject.put("errorMessage", failed.getMessage());
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
+
+        response.getWriter().print(jsonObject.toString());
         response.getWriter().flush();
     }
 }
