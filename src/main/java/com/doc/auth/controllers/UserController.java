@@ -18,7 +18,8 @@ public class UserController {
     @Autowired
     UserService userService;
 
-    @PostMapping("/cr    @PreAuthorize(\"hasAnyRole('ANONYMOUS', 'ADMIN')\")\neate")
+    @PostMapping("/create")
+    @PreAuthorize("hasAnyRole('ANONYMOUS', 'ADMIN')")
     public UserInfoDTO createUser(@RequestBody UserInfoDTO userInfoDTO) {
 
         checkNotNull(userInfoDTO);

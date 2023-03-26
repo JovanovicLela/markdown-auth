@@ -67,7 +67,7 @@ public class InitialiseProdData {
             MarkdownUserModel markdownUserModel1 = new MarkdownUserModel();
             markdownUserModel1.setUsername("admin");
             markdownUserModel1.setEmail("admin@gmail.com");
-            markdownUserModel1.setPassword(bCryptPasswordEncoder.encode("fflk1l2nj2njnjx"));
+            markdownUserModel1.setPassword(bCryptPasswordEncoder.encode("admin"));
             markdownUserModel1.setRoles(Collections.singletonList("ADMIN"));
             tokenService.generateToken(markdownUserModel1);
             markdownUserModel1.setDisplayName("adminDisplayName");

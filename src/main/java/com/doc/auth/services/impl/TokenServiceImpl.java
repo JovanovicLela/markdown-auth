@@ -40,6 +40,7 @@ public class TokenServiceImpl implements TokenService {
 
         jwtToken = Jwts.builder()
                     .setSubject(markdownUserModel.getUsername())
+                    .setIssuer(markdownUserModel.getId())
                     .setAudience(markdownUserModel.getRoles().toString())
                     .signWith(authSigningKeyResolver.getSecretKey(), SignatureAlgorithm.HS512)
                     .compact();

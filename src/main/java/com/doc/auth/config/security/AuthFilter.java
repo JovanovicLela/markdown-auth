@@ -1,6 +1,7 @@
 package com.doc.auth.config.security;
 
 import com.google.common.net.HttpHeaders;
+import org.apache.commons.lang3.StringUtils;
 import org.json.JSONObject;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -8,13 +9,13 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter;
 import org.springframework.security.web.util.matcher.RequestMatcher;
-import org.springframework.util.StringUtils;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Optional;
 
 import static javax.servlet.http.HttpServletResponse.SC_FORBIDDEN;
 import static org.springframework.util.ObjectUtils.isEmpty;
@@ -35,8 +36,9 @@ public class AuthFilter extends AbstractAuthenticationProcessingFilter {
 
         String tokenUnstripped= request.getHeader(HttpHeaders.AUTHORIZATION);
 
-        String token;
-        token = tokenUnstripped.split("\\s")[1];
+        String token = StringUtils.removeStart(Optional.ofNullable(tokenUnstripped).orElse(""), "Bearer");
+
+       // token = tokenUnstripped.split("\\s")[1];
 
         Authentication authentication;
         if (isEmpty(token)) {
