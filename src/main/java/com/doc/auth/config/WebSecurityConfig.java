@@ -25,7 +25,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and().authenticationProvider(markdownAuthProvider)
                 .addFilterBefore(authFilter(), AnonymousAuthenticationFilter.class)
-                .authorizeRequests().anyRequest().authenticated()
+                .authorizeRequests()
+                .anyRequest().authenticated()
                 .and().csrf().disable()
                 .httpBasic().disable()
                 .logout().disable()
@@ -37,11 +38,25 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         OrRequestMatcher orRequestMatcher = new OrRequestMatcher(
                 new AntPathRequestMatcher("/user/**"),
                 new AntPathRequestMatcher("/token/**"),
-                new AntPathRequestMatcher("/role/**")
+                new AntPathRequestMatcher("/role/**"),
+                new AntPathRequestMatcher( "/swagger-resources"),
+                new AntPathRequestMatcher( "/swagger-resources/**"),
+                new AntPathRequestMatcher( "/configuration/ui"),
+                new AntPathRequestMatcher("/configuration/security"),
+                new AntPathRequestMatcher( "/swagger-ui.html"),
+                new AntPathRequestMatcher( "/webjars/**" ),
+                new AntPathRequestMatcher("/v3/api-docs/**" ),
+                new AntPathRequestMatcher("/api/public/**" ),
+                new AntPathRequestMatcher("/api/public/authenticate"),
+                new AntPathRequestMatcher( "/actuator/*"),
+                new AntPathRequestMatcher( "/swagger-ui/**" ),
+                new AntPathRequestMatcher( "/swagger-ui-custom.html" )
+
         );
         AuthFilter authFilter = new AuthFilter(orRequestMatcher);
         authFilter.setAuthenticationManager(authenticationManager());
         return authFilter;
 
     }
+
 }
